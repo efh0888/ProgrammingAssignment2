@@ -1,7 +1,11 @@
-## Put comments here that give an overall description of what your
-## functions do
+## makeCacheMatrix takes a square invertible matrix (not forced but assumed)
+## and returns a list of four functions. It also stores the input matrix and the 
+## inverse matrix, which is NULL until computed by cacheSolve.
 
-## Write a short comment describing this function
+
+## This creates four functions within its own environment which can be
+## called at a later time, i.e. in cacheSolve. Namely, it will set and store
+## the inverse created in cacheSolve.
 
 makeCacheMatrix <- function(x = matrix()) {
   i <- NULL
@@ -19,7 +23,10 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## cacheSolve first checks if the inverse is NULL, i.e. has not been cached.
+## If it is cached, it will simply return the stored version rather than re-compute.
+## Otherwise, it computes the inverse for the given matrix with the solve() function
+## and sets it using setinverse() from makeCacheMatrix.
 
 cacheSolve <- function(x) {
   i <- x$getinverse()
@@ -33,12 +40,13 @@ cacheSolve <- function(x) {
   i
 }
 
-# Below is code for testing above functions, uncomment to test
-# f <- makeCacheMatrix(matrix(data = rnorm(n = 9), nrow = 3, ncol = 3))
-# f$get()
-# f$getinverse()  # should be NULL first time
-# 
-# cacheSolve(f)
-# cacheSolve(f)   # do you get message "getting cached data"?
-# 
-# f$getinverse()  # should produce the inverse now that it has been set in cacheSolve
+
+# Below is code for testing above functions
+f <- makeCacheMatrix(matrix(data = rnorm(n = 9), nrow = 3, ncol = 3))
+f$get()
+f$getinverse()  # should be NULL first time
+
+cacheSolve(f)
+cacheSolve(f)   # do you get message "getting cached data"?
+
+f$getinverse()  # should produce the inverse now that it has been set in cacheSolve
