@@ -33,10 +33,12 @@ cacheSolve <- function(x) {
   i
 }
 
-# Below is code for testing above functions
-f <- makeCacheMatrix(matrix(data = rnorm(n = 9), nrow = 3, ncol = 3))
-f$get()
-f$getinverse()
-
-cacheSolve(f)
-cacheSolve(f)   # do you get message "getting cached data"?
+# Below is code for testing above functions, uncomment to test
+# f <- makeCacheMatrix(matrix(data = rnorm(n = 9), nrow = 3, ncol = 3))
+# f$get()
+# f$getinverse()  # should be NULL first time
+# 
+# cacheSolve(f)
+# cacheSolve(f)   # do you get message "getting cached data"?
+# 
+# f$getinverse()  # should produce the inverse now that it has been set in cacheSolve
